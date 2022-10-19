@@ -58,7 +58,7 @@ body {
 }
 a {
   text-decoration:none;
-  color:inherit;
+  color:inherit; //부모한테 색상가져와
 }
 `;
 
