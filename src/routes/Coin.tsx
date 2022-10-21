@@ -144,7 +144,9 @@ const Tab = styled.span<{ isActive: boolean }>`
   }
 `;
 
-function Coin() {
+interface ICoinProps {}
+
+function Coin({}: ICoinProps) {
   const { coinId } = useParams<{ coinId: string }>();
   const { state } = useLocation() as RouteState; //coin.name정보가 들어있다
   const priceMatch = useMatch("/:coinId/price");

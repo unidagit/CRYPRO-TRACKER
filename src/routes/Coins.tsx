@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import { useQuery } from "react-query";
 import { fetchCoins } from "../api";
 import { Helmet } from "react-helmet";
+import { isDarkAtom } from "../atom";
+import { useSetRecoilState } from "recoil";
 
 const Container = styled.div`
   padding: 0px 20px;
@@ -67,7 +69,11 @@ const Img = styled.img`
   margin-right: 10px;
 `;
 
-function Coins() {
+interface ICoinProps {}
+
+function Coins({}: ICoinProps) {
+  const setDarkAtom = useSetRecoilState(isDarkAtom);
+  const toggleDarkAtom = () => setDarkAtom((prev) => !prev);
   const { isLoading, data } = useQuery<ICoin[]>("allCoins", fetchCoins);
   //위 한줄로 아래의 긴코드를 축약할 수 있다.
   // const [coins, setCoins] = useState<CoinInterface[]>([]);
@@ -90,6 +96,7 @@ function Coins() {
       </Helmet>
       <Header>
         <Title>코인</Title>
+        <button onClick={toggleDarkAtom}> Toggle Mode</button>
       </Header>
       {isLoading ? (
         <Loader>"Loading..."</Loader>
